@@ -15,7 +15,7 @@ i use this library below:
 
 # Description
 this the linke to app to follow 
-- Heroku URL:
+- Heroku URL:https://immense-springs-93121.herokuapp.com/
 - Deployed URL:
 - Github URL:https://github.com/oliversh99/CMS-style-Tech-Blog-Posts
 
