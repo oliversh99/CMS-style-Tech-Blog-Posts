@@ -17,7 +17,7 @@ i use this library below:
 this the linke to app to follow 
 - Heroku URL:
 - Deployed URL:
-- Github URL:
+- Github URL:https://github.com/oliversh99/CMS-style-Tech-Blog-Posts
 
 # License
 This project is convered under the None License.

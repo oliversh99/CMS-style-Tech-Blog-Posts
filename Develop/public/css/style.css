@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.TTB{
+    
+    background-color: rgb(39, 37, 37);
+    color: blue;
+}
+.hidden{
+    display: none;
+}
