@@ -1,35 +1,82 @@
-const router = require('express').Router();
-const { User } = require('../models');
-const withAuth = require('../utils/auth');
+const router = require("express").Router();
+const { Post, User, Comment } = require("../models");
 
-// Prevent non logged in users from viewing the homepage
-router.get('/', withAuth, async (req, res) => {
+// READ All Posts
+router.get("/", async (req, res) => {
   try {
-    const userData = await User.findAll({
-      attributes: { exclude: ['password'] },
-      order: [['name', 'ASC']],
+    const dbPost = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
     });
 
-    const users = userData.map((project) => project.get({ plain: true }));
-
-    res.render('homepage', {
-      users,
-      // Pass the logged in flag to the template
-      logged_in: req.session.logged_in,
-    });
+    const posts = dbPost.map((post) => post.get({ plain: true }));
+    console.log(req.session);
+    res.render("homepage", { posts, loggedIn: req.session.loggedIn });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
 
-router.get('/login', (req, res) => {
-  // If a session exists, redirect the request to the homepage
-  if (req.session.logged_in) {
-    res.redirect('/');
-    return;
-  }
+// READ a specific Post by ID with Comments
+router.get("/post/:id", async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+        {
+          model: Comment,
+          include: [User],
+        },
+      ],
+    });
 
-  res.render('login');
+    if (!postData) {
+      res.status(404).json({ message: "No post found with this id!" });
+      return;
+    }
+    const post = postData.get({ plain: true });
+    // console.log(post);
+
+    res.render("postPage", { post, loggedIn: req.session.loggedIn });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get("/login", async (req, res) => {
+  try {
+    if (req.session.loggedIn) {
+      res.redirect("/");
+      return;
+    } else {
+      res.render("login");
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get("/signup", async (req, res) => {
+  try {
+    if (req.session.loggedIn) {
+      res.redirect("/");
+    } else {
+      res.render("signup");
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
