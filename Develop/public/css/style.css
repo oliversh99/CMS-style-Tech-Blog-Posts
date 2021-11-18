@@ -1,13 +1,8 @@
-*{
-    margin: 0;
-    padding: 0;
+.main {
+  color: $orange-800;
 }
 
-.TTB{
-    
-    background-color: rgb(39, 37, 37);
-    color: blue;
-}
-.hidden{
-    display: none;
+body{
+  /* background-image: url('pictures/pic1.jpg'); */
+  background-color: rgb(26, 168, 145);
 }

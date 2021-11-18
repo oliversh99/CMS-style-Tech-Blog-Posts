@@ -1,14 +1,11 @@
 module.exports = {
-  get_emoji: () => {
-    const randomNum = Math.random();
-    let book = "📗";
+  format_date: (exhibition) => {
+    let [month, date, year] = new Date(exhibition)
+      .toLocaleDateString("en-US")
+      .split("/");
 
-    if (randomNum > 0.7) {
-      book = "📘";
-    } else if (randomNum > 0.4) {
-      book = "📙";
-    }
+    let closeYear = parseInt(year);
 
-    return `<span for="img" aria-label="book">${book}</span>`;
+    return `${month}/${date}/${closeYear}`;
   },
 };
