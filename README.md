@@ -1,5 +1,9 @@
 # CMS-style-Tech-Blog-Posts
 
+## Screenshot for the application
+
+<img src ="pictures\Screenshot.png" width="850" height="500">
+
 # User Story
 I want make this app to help Developer to make and posts notes and they can publish their blog posts and comment on other developers’ posts as wellthat I can write and save it too .
 
